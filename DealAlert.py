@@ -119,7 +119,12 @@ def search(products : list ):
         name = product['Name']
         print(f'\nSearching for : {name.replace('_',' ')}')
         print('Scraping KSP...')
-        ksp = Sites.KSP(product['ksp']).replace(',','')
+        ksp = Sites.KSP(product['ksp'])
+        if ksp != None :
+        
+            ksp = Sites.KSP(product['ksp']).replace(',','')
+        else :
+            ksp = 'None'
         print('Scraping Ivory...')
 
         # does not exist
