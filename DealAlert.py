@@ -1,28 +1,15 @@
-# this program will go through known & safe websites and check products
-# next it will save the data in a database, so the price is known
-# and if there's a good sale, alert me.
-
-# maybe try to make a shopping list, and run it across multiple known stores and get the best deal
-
-# add a few more websites... EG mahsanei hashmal, TMS , bug
-# make an Alert vehicle, such as sending an email ,
-# calculate the average price and if the latest price drops below it, send an email
-# make a UI where it will be easy to insert alerts or delete alerts - either TKinter or frontend
-# figure out how to enter URLs and save them easier
-# bug & ERROR fixes
 
 
 
-import os
-
-
-
+# libraries for notifying for deals
 from winotify import Notification , audio
 
 # libraries for scraping data
 import sqlite3
 from bs4 import BeautifulSoup
 import requests
+
+# selenium for KSP
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
