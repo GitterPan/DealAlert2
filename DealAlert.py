@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # this program will go through known & safe websites and check products
 # next it will save the data in a database, so the price is known
 # and if there's a good sale, alert me.
@@ -14,15 +15,20 @@
 
 import json
 import os
+=======
+>>>>>>> caa74d619ba34509645005b50ff4230bc9569185
 
 
 
+# libraries for notifying for deals
 from winotify import Notification , audio
 
 # libraries for scraping data
 import sqlite3
 from bs4 import BeautifulSoup
 import requests
+
+# selenium for KSP
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
