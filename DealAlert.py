@@ -12,7 +12,7 @@
 # bug & ERROR fixes
 
 
-
+import json
 import os
 
 
@@ -38,7 +38,7 @@ class Sites:
     # searches the price on an Ivory URL and returns it.
     # ID=cancelproduct, if exists site, has removed the product
     def IVORY(URL : str):
-        if not URL   :
+        if URL  == '' :
             return 'None'
         try :
             ivory = requests.get(URL)
@@ -83,11 +83,12 @@ class Sites:
     #  סופר-פארם
     @staticmethod
     def SUPERPHARM(URL: str):
-        if not URL :
+        if URL == '':
             return 'None'
         try :
             r = requests.get(URL)
-        except : return 'None'
+        except : 
+            return 'None'
         html_text = r.text
         soup = BeautifulSoup(html_text, 'html.parser')
         soup = soup.find('span', class_='price-container').text.split()
@@ -96,7 +97,7 @@ class Sites:
     # מחסני-חשמל
     @staticmethod
     def Electric_Storage(URL : str):
-        if not URL  :
+        if URL == ''  :
             return 'None'
         try :
             r = requests.get(URL)
@@ -116,7 +117,7 @@ def search(products : list ):
     time = str(datetime.datetime.now()).split(' ')[1].split('.')[0]
     date = str(datetime.datetime.now()).split(' ')[0]
     for product in products :
-        name = product['Name']
+        name = product['Name'].replace(' ','_')
         print(f'\nSearching for : {name.replace('_',' ')}')
         print('Scraping KSP...')
         ksp = Sites.KSP(product['ksp'])
@@ -201,16 +202,13 @@ class Product :
 
 
 # Products to scrape
+f = open('products.json')
+data = json.load(f)
 
-ahs = Product('Allure homme sport 150ml', 'https://ksp.co.il/web/item/50123','https://www.ivory.co.il/catalog.php?id=33685').CreateDict()
-dylanBlue = Product('Versace Dylan blue 100ml','https://ksp.co.il/web/item/42049','https://www.ivory.co.il/catalog.php?id=98421','https://shop.super-pharm.co.il/cosmetics/perfumes/men/DYLAN-BLUE-%D7%90-%D7%93-%D7%98-%D7%9C%D7%92%D7%91%D7%A8/p/530938').CreateDict()
-ahsee = Product('Allure homme sport eau extreme 150ml','https://ksp.co.il/web/item/115729').CreateDict()
-Issey_Miyake = Product('Issey Miyake edt 165ml','https://ksp.co.il/web/item/302972','https://www.ivory.co.il/catalog.php?id=99893').CreateDict()
-dior_sauvage_parfum_100ml = Product('Dior sauvage parfum 100ml','https://ksp.co.il/web/item/107554','https://www.ivory.co.il/catalog.php?id=39573','https://shop.super-pharm.co.il/cosmetics/perfumes/men/SAUVAGE-%D7%A4%D7%A8%D7%A4%D7%99%D7%95%D7%9D-%D7%9C%D7%92%D7%91%D7%A8/p/595499').CreateDict()
+products = []
 
-
-
-products : list = [ahs,ahsee,dylanBlue,Issey_Miyake,dior_sauvage_parfum_100ml]
+for i in data['products']:
+    products.append(i)
 
 
 
